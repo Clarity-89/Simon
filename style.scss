@@ -1,8 +1,8 @@
 $background: #b0b0b0;
 $sector-height: 200px;
 $sector-width: $sector-height;
-$sector-horiz: 20px;
-$sector-vertical: 15px;
+$sector-horiz: 35px;
+$sector-vertical: 30px;
 html, body {
   height: 100%;
   overflow: auto;
@@ -36,6 +36,7 @@ body {
   left: $sector-horiz;
   top: $sector-vertical;
   background-color: red;
+  border-radius: 320px 0 0 0;
 }
 
 .blue {
@@ -43,6 +44,7 @@ body {
   left: $sector-horiz;
   bottom: $sector-vertical;
   background-color: blue;
+  border-radius: 0 0 0 320px;
 }
 
 .yellow {
@@ -50,6 +52,7 @@ body {
   right: $sector-horiz;
   top: $sector-vertical;
   background-color: yellow;
+  border-radius: 0 320px 0 0;
 }
 
 .green {
@@ -57,4 +60,5 @@ body {
   right: $sector-horiz;
   bottom: $sector-vertical;
   background-color: green;
+  border-radius: 0 0 320px 0;
 }
