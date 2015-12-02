@@ -1,0 +1,52 @@
+html, body {
+  height: 100%;
+  overflow: auto; }
+
+body {
+  background-color: #b0b0b0; }
+
+.container {
+  text-align: center; }
+
+.circle {
+  position: relative;
+  background-color: aqua;
+  margin: 5% auto;
+  height: 500px;
+  width: 500px;
+  border-radius: 50%; }
+
+.sector {
+  height: 200px;
+  width: 200px;
+  background-color: azure; }
+
+.red {
+  position: absolute;
+  left: 35px;
+  top: 30px;
+  background-color: red;
+  border-radius: 320px 0 0 0; }
+
+.blue {
+  position: absolute;
+  left: 35px;
+  bottom: 30px;
+  background-color: blue;
+  border-radius: 0 0 0 320px; }
+
+.yellow {
+  position: absolute;
+  right: 35px;
+  top: 30px;
+  background-color: yellow;
+  border-radius: 0 320px 0 0; }
+
+.green {
+  position: absolute;
+  right: 35px;
+  bottom: 30px;
+  background-color: green;
+  border-radius: 0 0 320px 0; }
+
+/*# sourceMappingURL=style.css.map */
