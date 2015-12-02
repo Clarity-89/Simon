@@ -1,4 +1,8 @@
 $background: #b0b0b0;
+$sector-height: 200px;
+$sector-width: $sector-height;
+$sector-horiz: 20px;
+$sector-vertical: 15px;
 html, body {
   height: 100%;
   overflow: auto;
@@ -13,9 +17,44 @@ body {
 }
 
 .circle {
+  position: relative;
   background-color: aqua;
   margin: 5% auto;
   height: 500px;
   width: 500px;
   border-radius: 50%;
+}
+
+.sector {
+  height: $sector-height;
+  width: $sector-width;
+  background-color: azure;
+}
+
+.red {
+  position: absolute;
+  left: $sector-horiz;
+  top: $sector-vertical;
+  background-color: red;
+}
+
+.blue {
+  position: absolute;
+  left: $sector-horiz;
+  bottom: $sector-vertical;
+  background-color: blue;
+}
+
+.yellow {
+  position: absolute;
+  right: $sector-horiz;
+  top: $sector-vertical;
+  background-color: yellow;
+}
+
+.green {
+  position: absolute;
+  right: $sector-horiz;
+  bottom: $sector-vertical;
+  background-color: green;
 }
