@@ -10,7 +10,7 @@ body {
 
 .circle {
   position: relative;
-  background-color: #4b4b4b;
+  background-color: rgba(45, 45, 45, 0.89);
   margin: 5% auto;
   height: 500px;
   width: 500px;
@@ -19,34 +19,36 @@ body {
 .sector {
   height: 200px;
   width: 200px;
-  background-color: azure; }
+  position: absolute; }
 
 .red {
-  position: absolute;
   left: 35px;
   top: 30px;
-  background-color: red;
+  background-color: #b30000;
   border-radius: 320px 0 0 0; }
 
 .blue {
-  position: absolute;
   left: 35px;
   bottom: 30px;
-  background-color: blue;
+  background-color: #0000b3;
   border-radius: 0 0 0 320px; }
 
 .yellow {
-  position: absolute;
   right: 35px;
   top: 30px;
-  background-color: yellow;
+  background-color: #bdbd00;
   border-radius: 0 320px 0 0; }
 
 .green {
-  position: absolute;
   right: 35px;
   bottom: 30px;
   background-color: green;
   border-radius: 0 0 320px 0; }
+
+.round {
+  position: absolute;
+  background-color: white;
+  height: 200px;
+  width: 200px; }
 
 /*# sourceMappingURL=style.css.map */
