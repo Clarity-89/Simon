@@ -19,7 +19,7 @@ body {
 
 .circle {
   position: relative;
-  background-color: #4b4b4b;
+  background-color: rgba(45, 45, 45, 0.89);
   margin: 5% auto;
   height: 500px;
   width: 500px;
@@ -29,37 +29,41 @@ body {
 .sector {
   height: $sector-height;
   width: $sector-width;
-  background-color: azure;
+  position: absolute;
 }
 
 .red {
-  position: absolute;
+
   left: $sector-horiz;
   top: $sector-vertical;
-  background-color: red;
+  background-color: darken(red, 15%);
   border-radius: 320px 0 0 0;
 }
 
 .blue {
-  position: absolute;
   left: $sector-horiz;
   bottom: $sector-vertical;
-  background-color: blue;
+  background-color: darken(blue, 15%);
   border-radius: 0 0 0 320px;
 }
 
 .yellow {
-  position: absolute;
   right: $sector-horiz;
   top: $sector-vertical;
-  background-color: yellow;
+  background-color: #bdbd00;
   border-radius: 0 320px 0 0;
 }
 
 .green {
-  position: absolute;
   right: $sector-horiz;
   bottom: $sector-vertical;
   background-color: green;
   border-radius: 0 0 320px 0;
+}
+
+.round {
+  position: absolute;
+  background-color: white;
+  height: $sector-height;
+  width: $sector-width;
 }
