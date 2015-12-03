@@ -2,8 +2,13 @@ html, body {
   height: 100%;
   overflow: auto; }
 
+* {
+  margin: 0;
+  padding: 0; }
+
 body {
-  background-color: #b0b0b0; }
+  background-color: #b0b0b0;
+  font-family: 'Lato', sans-serif; }
 
 .container {
   text-align: center; }
@@ -21,28 +26,28 @@ body {
   width: 200px;
   position: absolute; }
 
-.red {
+.green {
   left: 35px;
   top: 30px;
-  background-color: #b30000;
+  background-color: green;
   border-radius: 320px 0 0 0; }
 
-.blue {
+.yellow {
   left: 35px;
   bottom: 30px;
-  background-color: #0000b3;
+  background-color: #bdbd00;
   border-radius: 0 0 0 320px; }
 
-.yellow {
+.red {
   right: 35px;
   top: 30px;
-  background-color: #bdbd00;
+  background-color: #b30000;
   border-radius: 0 320px 0 0; }
 
-.green {
+.blue {
   right: 35px;
   bottom: 30px;
-  background-color: green;
+  background-color: #0000b3;
   border-radius: 0 0 320px 0; }
 
 .round {
@@ -57,5 +62,45 @@ body {
   top: 0;
   bottom: 0;
   margin: auto; }
+
+#reg-mark {
+  font-size: 12px; }
+
+h1 {
+  font-size: 48px;
+  font-weight: 900;
+  margin-top: 40px; }
+
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50px;
+  height: 40px;
+  background-color: aliceblue;
+  margin: 0 auto;
+  font-size: 24px;
+  border-radius: 15px; }
+
+.btn-round {
+  height: 30px;
+  width: 30px;
+  border: solid 2px #50280b; }
+
+#start {
+  background-color: #de0000;
+  border-radius: 50%;
+  margin-right: 15px; }
+
+#reset {
+  background-color: #efef00;
+  border-radius: 50%; }
+
+#st {
+  margin-right: 5px; }
+
+#st, #rs, #c {
+  font-family: 'Special Elite', sans-serif; }
 
 /*# sourceMappingURL=style.css.map */

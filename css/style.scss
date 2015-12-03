@@ -10,8 +10,14 @@ html, body {
   overflow: auto;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: $background;
+  font-family: 'Lato', sans-serif;
 }
 
 .container {
@@ -33,32 +39,31 @@ body {
   position: absolute;
 }
 
-.red {
-
+.green {
   left: $sector-horiz;
   top: $sector-vertical;
-  background-color: darken(red, 15%);
+  background-color: green;
   border-radius: 320px 0 0 0;
 }
 
-.blue {
+.yellow {
   left: $sector-horiz;
   bottom: $sector-vertical;
-  background-color: darken(blue, 15%);
+  background-color: #bdbd00;
   border-radius: 0 0 0 320px;
 }
 
-.yellow {
+.red {
   right: $sector-horiz;
   top: $sector-vertical;
-  background-color: #bdbd00;
+  background-color: darken(red, 15%);
   border-radius: 0 320px 0 0;
 }
 
-.green {
+.blue {
   right: $sector-horiz;
   bottom: $sector-vertical;
-  background-color: green;
+  background-color: darken(blue, 15%);
   border-radius: 0 0 320px 0;
 }
 
@@ -69,9 +74,57 @@ body {
   width: 270px;
   border-radius: 50%;
   border: 20px solid $border-color;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
   top: 0;
   bottom: 0;
-  margin:auto;
+  margin: auto;
+}
+
+#reg-mark {
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 900;
+  margin-top: 40px;
+}
+
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 50px;
+  height: 40px;
+  background-color: aliceblue;
+  margin: 0 auto;
+  font-size: 24px;
+  border-radius: 15px;
+}
+
+.btn-round {
+  height: 30px;
+  width: 30px;
+  border: solid 2px #50280b;
+}
+
+#start {
+  background-color: #de0000;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+#reset {
+  background-color: #efef00;
+  border-radius: 50%;
+}
+
+#st {
+  margin-right: 5px;
+}
+
+#st, #rs, #c {
+  font-family: 'Special Elite', sans-serif;
 }
