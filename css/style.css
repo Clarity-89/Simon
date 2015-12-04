@@ -24,30 +24,31 @@ body {
 .sector {
   height: 200px;
   width: 200px;
-  position: absolute; }
+  position: absolute;
+  opacity: 0.6; }
 
 .green {
   left: 35px;
   top: 30px;
-  background-color: green;
+  background-color: #00b200;
   border-radius: 320px 0 0 0; }
 
 .yellow {
   left: 35px;
   bottom: 30px;
-  background-color: #bdbd00;
+  background-color: #efef00;
   border-radius: 0 0 0 320px; }
 
 .red {
   right: 35px;
   top: 30px;
-  background-color: #b30000;
+  background-color: red;
   border-radius: 0 320px 0 0; }
 
 .blue {
   right: 35px;
   bottom: 30px;
-  background-color: #0000b3;
+  background-color: blue;
   border-radius: 0 0 320px 0; }
 
 .round {
