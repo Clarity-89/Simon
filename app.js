@@ -21,7 +21,9 @@ $(document).ready(function () {
     function playChoices(arr) {
         arr.forEach(function (el, i) {
             el.delay(1000 * i).animate({opacity: 1}, 1000, function () {
-                el.animate({opacity: 0.6}, 1000);
+                setTimeout(function(){
+                    el.animate({opacity: 0.6}, 1000);
+                }, 1000);
             });
         });
     }

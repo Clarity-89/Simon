@@ -27,6 +27,9 @@ body {
   position: absolute;
   opacity: 0.6; }
 
+.sector:hover {
+  cursor: pointer; }
+
 .green {
   left: 35px;
   top: 30px;

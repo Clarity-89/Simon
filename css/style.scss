@@ -40,6 +40,10 @@ body {
   opacity: 0.6;
 }
 
+.sector:hover {
+  cursor: pointer;
+}
+
 .green {
   left: $sector-horiz;
   top: $sector-vertical;
