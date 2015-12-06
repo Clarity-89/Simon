@@ -4,7 +4,8 @@
 $(document).ready(function () {
 
     //assign jquery objs to vars
-    var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red');
+    var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
+        countScreen = $('.count');
 
     //Variable to keep track of the game's progress
     var count = 0;
@@ -44,10 +45,20 @@ $(document).ready(function () {
     //function to run the game
     function runGame() {
         computerChoices.push(randomChoice(sectors));
+        count++;
+        countScreen.text(count);
         playChoices(computerChoices);
     }
 
     $('#start').on('click', function () {
         runGame();
+    });
+
+    //Reset the game
+    $('#reset').on('click', function () {
+        count = 0;
+        countScreen.text(count);
+        userChoices = [];
+        computerChoices = [];
     });
 });
