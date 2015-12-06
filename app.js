@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     //assign jquery objs to vars
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
-        countScreen = $('.count');
+        countScreen = $('.count'), sector = $('.sector');
 
     //Variable to keep track of the game's progress
     var count = 0;
@@ -42,13 +42,24 @@ $(document).ready(function () {
         myLoop();
     }
 
+    //Animate user's selection and add it to the respective array
+    function userMove() {
+        sector.mousedown(function () {
+            $(this).animate({opacity: 1});
+        }).mouseup(function () {
+            $(this).animate({opacity: 0.4});
+        });
+    }
+
     //function to run the game
     function runGame() {
         computerChoices.push(randomChoice(sectors));
         count++;
         countScreen.text(count);
         playChoices(computerChoices);
+        userMove();
     }
+
 
     $('#start').on('click', function () {
         runGame();
