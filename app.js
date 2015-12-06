@@ -5,6 +5,10 @@ $(document).ready(function () {
 
     //assign jquery objs to vars
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red');
+
+    //Variable to keep track of the game's progress
+    var count = 0;
+
     //An array of all the class names for the sectors
     var sectors = [green, yellow, red, blue];
 
@@ -18,25 +22,13 @@ $(document).ready(function () {
     }
 
     //function to 'play' the choices from an array
-    /* function playChoices(arr) {
-     arr.forEach(function (el, i) {
-     console.log(el);
-     setInterval(function () {
-     el.delay(1000 * i).animate({opacity: 1}, 1000, function () {
-
-     el.removeAttr('style');
-
-     });
-     }, 500);
-     });
-     }*/
     function playChoices(arr) {
         var i = 0;
 
         function myLoop() {
             setTimeout(function () {
                 var el = arr[i];
-                el.animate({opacity: 1}, 800, function () {
+                el.animate({opacity: 1}, 1000, function () {
                     el.removeAttr('style');
                 });
                 i++;
