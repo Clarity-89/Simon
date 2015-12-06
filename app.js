@@ -44,8 +44,23 @@ $(document).ready(function () {
 
     //Animate user's selection and add it to the respective array
     function userMove() {
+        var index;
+
         sector.mousedown(function () {
-            $(this).animate({opacity: 1});
+             index = 0;
+            if (userChoices.length < computerChoices.length) {
+                console.log(index);
+                $(this).animate({opacity: 1});
+                userChoices.push($(this));
+                if ($(this)[0].className != computerChoices[index][0].className) {
+                    console.log('WRONG!');
+                    playChoices(computerChoices);
+                } else {
+                    index++;
+                    runGame();
+                }
+            }
+            console.log(userChoices)
         }).mouseup(function () {
             $(this).animate({opacity: 0.4});
         });
@@ -58,6 +73,7 @@ $(document).ready(function () {
         countScreen.text(count);
         playChoices(computerChoices);
         userMove();
+
     }
 
 
@@ -67,6 +83,7 @@ $(document).ready(function () {
 
     //Reset the game
     $('#reset').on('click', function () {
+        sector.off();
         count = 0;
         countScreen.text(count);
         userChoices = [];
