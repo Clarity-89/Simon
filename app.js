@@ -9,7 +9,7 @@ $(document).ready(function () {
     var sectors = [green, yellow, red, blue];
 
     // Arrays for user's and computer choices
-    var userChoices = [], computerChoices = [green, green];
+    var userChoices = [], computerChoices = [];
 
     //function to get a random element from an array
     function randomChoice(arr) {
@@ -18,14 +18,35 @@ $(document).ready(function () {
     }
 
     //function to 'play' the choices from an array
+    /* function playChoices(arr) {
+     arr.forEach(function (el, i) {
+     console.log(el);
+     setInterval(function () {
+     el.delay(1000 * i).animate({opacity: 1}, 1000, function () {
+
+     el.removeAttr('style');
+
+     });
+     }, 500);
+     });
+     }*/
     function playChoices(arr) {
-        arr.forEach(function (el, i) {
-            el.delay(1000 * i).animate({opacity: 1}, 1000, function () {
-                setTimeout(function(){
-                    el.animate({opacity: 0.6}, 1000);
-                }, 1000);
-            });
-        });
+        var i = 0;
+
+        function myLoop() {
+            setTimeout(function () {
+                var el = arr[i];
+                el.animate({opacity: 1}, 800, function () {
+                    el.removeAttr('style');
+                });
+                i++;
+                if (i < arr.length) {
+                    myLoop();
+                }
+            }, 1000)
+        }
+
+        myLoop();
     }
 
     //function to run the game
