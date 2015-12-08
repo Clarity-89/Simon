@@ -5,14 +5,16 @@ $(document).ready(function () {
 
     //assign jquery objs to vars
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
-        countScreen = $('.count'), sector = $('.sector');
+        countScreen = $('.count'), sector = $('.sector'), message = $('.alert');
+
+    // Variable to keep track of the index of current element in computerChoices array
     var index = 0;
 
     //Variable to keep track of the game's progress
     var count = 0;
 
     //Keep track of the game state to allow waiting for user's clicks
-    var started = false;
+    var started = true;
 
     //An array of all the class names for the sectors
     var sectors = [green, yellow, red, blue];
@@ -48,25 +50,39 @@ $(document).ready(function () {
 
     //Animate user's selection and add it to the respective array
     function userMove() {
-        console.log('index', userChoices.length);
-        if (userChoices.length < computerChoices.length) {
-            userChoices.push($(this));
-            if ($(this)[0].className != computerChoices[index][0].className) {
-                alert('WRONG!');
-                index = 0;
-                playChoices(computerChoices);
-                userMove();
+        if (started) {
+            if (userChoices.length < computerChoices.length) {
+                userChoices.push($(this));
+                if ($(this)[0].className != computerChoices[index][0].className) {
+                    userChoices = [];
+                    index = 0;
+                    message.show().removeClass('alert-success').addClass('alert-danger').text('Incorrect. Try again!');
+                    setTimeout(function () {
+                        message.hide();
+                    }, 500);
+                    //repeat choices
+                    playChoices(computerChoices);
+                } else {
+                    index++;
+                    if (userChoices.length === computerChoices.length) {
+                        message.show().removeClass('alert-danger').addClass('alert-success').text('Correct!');
+                        setTimeout(function () {
+                            message.hide();
+                        }, 700);
+                        index = 0;
+                        started = false;
+                    }
+                }
             } else {
-                index++;
-                runGame();
+                started = false;
             }
         }
     }
 
-    var runner = setInterval(function () {
+    //Check for the game state and wait till the player makes choices
+    setInterval(function () {
         if (!started) {
             runGame();
-            clearInterval(runner);
         }
     }, 1000);
 
@@ -81,12 +97,12 @@ $(document).ready(function () {
     }
 
     $('#start').on('click', function () {
-        runGame();
+        started = false;
     });
 
     //Reset the game
     $('#reset').on('click', function () {
-        sector.off();
+        started = true;
         count = 0;
         countScreen.text(count);
         userChoices = [];
@@ -98,5 +114,5 @@ $(document).ready(function () {
         $(this).animate({opacity: 1});
     }).mouseup(function () {
         $(this).animate({opacity: 0.4});
-    }).onclick(userMove);
+    }).click(userMove);
 });
