@@ -6,10 +6,10 @@ $(document).ready(function () {
     //assign jquery objs to vars
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
         countScreen = $('.count'), sector = $('.sector');
-
+    var index = 0;
     //Variable to keep track of the game's progress
     var count = 0;
-
+    var started = false;
     //An array of all the class names for the sectors
     var sectors = [green, yellow, red, blue];
 
@@ -44,38 +44,37 @@ $(document).ready(function () {
 
     //Animate user's selection and add it to the respective array
     function userMove() {
-        var index;
-
-        sector.mousedown(function () {
-             index = 0;
-            if (userChoices.length < computerChoices.length) {
-                console.log(index);
-                $(this).animate({opacity: 1});
-                userChoices.push($(this));
-                if ($(this)[0].className != computerChoices[index][0].className) {
-                    console.log('WRONG!');
-                    playChoices(computerChoices);
-                } else {
-                    index++;
-                    runGame();
-                }
+        console.log('index', userChoices.length);
+        if (userChoices.length < computerChoices.length) {
+            userChoices.push($(this));
+            if ($(this)[0].className != computerChoices[index][0].className) {
+                alert('WRONG!');
+                index = 0;
+                playChoices(computerChoices);
+                userMove();
+            } else {
+                index++;
+                runGame();
             }
-            console.log(userChoices)
-        }).mouseup(function () {
-            $(this).animate({opacity: 0.4});
-        });
+        }
     }
 
-    //function to run the game
+    var runner = setInterval(function () {
+        if (!started) {
+            runGame();
+            clearInterval(runner);
+        }
+    }, 1000);
+
+    //Function to run the game
     function runGame() {
+        userChoices = [];
         computerChoices.push(randomChoice(sectors));
         count++;
         countScreen.text(count);
         playChoices(computerChoices);
         userMove();
-
     }
-
 
     $('#start').on('click', function () {
         runGame();
@@ -89,4 +88,11 @@ $(document).ready(function () {
         userChoices = [];
         computerChoices = [];
     });
+
+    //Highlight a sector when pressed on
+    sector.mousedown(function () {
+        $(this).animate({opacity: 1});
+    }).mouseup(function () {
+        $(this).animate({opacity: 0.4});
+    }).onclick(userMove);
 });
