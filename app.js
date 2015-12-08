@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     //assign jquery objs to vars
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
-        countScreen = $('.count'), sector = $('.sector'), message = $('.alert');
+        countScreen = $('.count span'), sector = $('.sector'), message = $('.alert');
 
     // Variable to keep track of the index of current element in computerChoices array
     var index = 0;
@@ -91,7 +91,7 @@ $(document).ready(function () {
         userChoices = [];
         computerChoices.push(randomChoice(sectors));
         count++;
-        countScreen.text(count);
+        countScreen.hide().text(count).fadeIn();
         playChoices(computerChoices);
         started = true;
     }
