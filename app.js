@@ -3,9 +3,33 @@
  */
 $(document).ready(function () {
 
-    //assign jquery objs to vars
+    //assign jquery objects to vars
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
         countScreen = $('.count span'), sector = $('.sector'), message = $('.alert');
+
+    // Load sounds
+    var sounds = {
+        green: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
+        blue: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
+        red: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+        yellow: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
+        error: new Audio('audio/error.wav')
+    };
+
+    // Play sound based on the element provided
+    function playSound(sector) {
+        var targetSector = sector.attr('class').split(' ')[1]; //get the name of the element's second class
+        sounds[targetSector].play();
+    }
+
+    //Stop all playing sounds
+    function stopSound() {
+        for (var sound in sounds) {
+            if (sounds.hasOwnProperty(sound) && !sounds[sound]) {
+                sounds[sound].pause();
+            }
+        }
+    }
 
     // Variable to keep track of the index of current element in computerChoices array
     var index = 0;
@@ -35,8 +59,10 @@ $(document).ready(function () {
         function myLoop() {
             setTimeout(function () {
                 var el = arr[i];
+                playSound(el);
                 el.animate({opacity: 1}, 1000, function () {
                     el.removeAttr('style');
+                    stopSound();
                 });
                 i++;
                 if (i < arr.length) {
@@ -50,19 +76,22 @@ $(document).ready(function () {
 
     //Animate user's selection and add it to the respective array
     function userMove() {
+        stopSound();
+        var el = $(this);
         if (started) {
             if (userChoices.length < computerChoices.length) {
-                userChoices.push($(this));
-                if ($(this)[0].className != computerChoices[index][0].className) {
+                userChoices.push(el);
+                if (el[0].className != computerChoices[index][0].className) {
                     userChoices = [];
                     index = 0;
+                    sounds.error.play();
                     message.show().removeClass('alert-success').addClass('alert-danger').text('Incorrect. Try again!');
                     setTimeout(function () {
                         message.hide();
                     }, 500);
-                    //repeat choices
-                    playChoices(computerChoices);
+                    playChoices(computerChoices); //repeat choices
                 } else {
+                    playSound(el);
                     index++;
                     if (userChoices.length === computerChoices.length) {
                         message.show().removeClass('alert-danger').addClass('alert-success').text('Correct!');
