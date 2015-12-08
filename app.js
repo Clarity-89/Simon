@@ -7,9 +7,13 @@ $(document).ready(function () {
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
         countScreen = $('.count'), sector = $('.sector');
     var index = 0;
+
     //Variable to keep track of the game's progress
     var count = 0;
+
+    //Keep track of the game state to allow waiting for user's clicks
     var started = false;
+
     //An array of all the class names for the sectors
     var sectors = [green, yellow, red, blue];
 
@@ -73,7 +77,7 @@ $(document).ready(function () {
         count++;
         countScreen.text(count);
         playChoices(computerChoices);
-        userMove();
+        started = true;
     }
 
     $('#start').on('click', function () {
@@ -89,7 +93,7 @@ $(document).ready(function () {
         computerChoices = [];
     });
 
-    //Highlight a sector when pressed on
+    //Highlight a sector when pressed on and attach onclick event
     sector.mousedown(function () {
         $(this).animate({opacity: 1});
     }).mouseup(function () {
