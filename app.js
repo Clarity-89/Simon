@@ -85,19 +85,19 @@ $(document).ready(function () {
                     userChoices = [];
                     index = 0;
                     sounds.error.play();
-                    message.show().removeClass('alert-success').addClass('alert-danger').text('Incorrect. Try again!');
+                    message.removeClass('alert-success').addClass('alert-danger').text('Incorrect. Try again!').show();
                     setTimeout(function () {
-                        message.hide();
-                    }, 500);
+                        message.fadeOut(200);
+                    }, 1100);
                     playChoices(computerChoices); //repeat choices
                 } else {
                     playSound(el);
                     index++;
                     if (userChoices.length === computerChoices.length) {
-                        message.show().removeClass('alert-danger').addClass('alert-success').text('Correct!');
+                        message.removeClass('alert-danger').addClass('alert-success').text('Correct!').show();
                         setTimeout(function () {
-                            message.hide();
-                        }, 700);
+                            message.fadeOut(200);
+                        }, 1100);
                         index = 0;
                         started = false;
                     }
@@ -120,9 +120,9 @@ $(document).ready(function () {
         userChoices = [];
         computerChoices.push(randomChoice(sectors));
         count++;
-        countScreen.hide().text(count).fadeIn();
         playChoices(computerChoices);
         started = true;
+        countScreen.hide().text(count).fadeIn();
     }
 
     $('#start').on('click', function () {

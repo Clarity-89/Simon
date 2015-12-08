@@ -109,6 +109,7 @@ h1 {
 
 .alert {
   width: 200px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
