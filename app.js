@@ -111,12 +111,12 @@ $(document).ready(function () {
     //Check for the game state and wait till the player makes choices
     setInterval(function () {
         if (!started) {
-            runGame();
+            computerMove();
         }
     }, 1000);
 
-    //Function to run the game
-    function runGame() {
+    //Choose a random sector and play it
+    function computerMove() {
         userChoices = [];
         computerChoices.push(randomChoice(sectors));
         count++;
