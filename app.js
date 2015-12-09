@@ -7,6 +7,9 @@ $(document).ready(function () {
     var yellow = $('.yellow'), blue = $('.blue'), green = $('.green'), red = $('.red'),
         countScreen = $('.count span'), sector = $('.sector'), message = $('.alert');
 
+    //Variable to keep track of the game's progress
+    var count = 0;
+
     // Load sounds
     var sounds = {
         green: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
@@ -16,9 +19,14 @@ $(document).ready(function () {
         error: new Audio('audio/error.wav')
     };
 
+    // Increase animation and sound speed depending on the count
+    var soundTempo = 1,
+        animationTempo = 1000;
+
     // Play sound based on the element provided
     function playSound(sector) {
         var targetSector = sector.attr('class').split(' ')[1]; //get the name of the element's second class
+        sounds[targetSector].playbackRate = soundTempo;
         sounds[targetSector].play();
     }
 
@@ -34,8 +42,6 @@ $(document).ready(function () {
     // Variable to keep track of the index of current element in computerChoices array
     var index = 0;
 
-    //Variable to keep track of the game's progress
-    var count = 0;
 
     //Keep track of the game state to allow waiting for user's clicks
     var started = true;
@@ -60,15 +66,16 @@ $(document).ready(function () {
             setTimeout(function () {
                 var el = arr[i];
                 playSound(el);
-                el.animate({opacity: 1}, 1000, function () {
+                el.animate({opacity: 1}, animationTempo, function () {
                     el.removeAttr('style');
                     stopSound();
+                    started = true; // set started to true only after animation completes so user can't click until then
                 });
                 i++;
                 if (i < arr.length) {
                     myLoop();
                 }
-            }, 1000)
+            }, animationTempo)
         }
 
         myLoop();
@@ -78,6 +85,7 @@ $(document).ready(function () {
     function userMove() {
         stopSound();
         var el = $(this);
+        console.log(el);
         if (started) {
             if (userChoices.length < computerChoices.length) {
                 userChoices.push(el);
@@ -120,13 +128,16 @@ $(document).ready(function () {
         userChoices = [];
         computerChoices.push(randomChoice(sectors));
         count++;
+        soundTempo = count < 5 ? 3 : count >= 5 && count < 9 ? 1.5 : count >= 9 && count < 13 ? 2 : 2.5;
+        animationTempo = count < 5 ? 350 : count >= 5 && count < 9 ? 750 : count >= 9 && count < 13 ? 500 : 350;
         playChoices(computerChoices);
-        started = true;
         countScreen.hide().text(count).fadeIn();
     }
 
     $('#start').on('click', function () {
-        started = false;
+        if (count === 0) {
+            started = false;
+        }
     });
 
     //Reset the game
@@ -140,8 +151,12 @@ $(document).ready(function () {
 
     //Highlight a sector when pressed on and attach onclick event
     sector.mousedown(function () {
-        $(this).animate({opacity: 1});
+        if (started) {
+            $(this).animate({opacity: 1});
+        }
     }).mouseup(function () {
-        $(this).animate({opacity: 0.4});
+        if (started) {
+            $(this).animate({opacity: 0.4});
+        }
     }).click(userMove);
 });
