@@ -19,18 +19,17 @@ $(document).ready(function () {
         error: new Audio('audio/error.wav')
     };
 
-    // Increase animation and sound speed depending on the count
-    var soundTempo = 1,
-        animationTempo = 1000;
+    // Track animation and sound speed
+    var soundTempo, animationTempo;
 
-    // Play sound based on the element provided
+    // Play sound based on the element provided and set its tempo
     function playSound(sector) {
         var targetSector = sector.attr('class').split(' ')[1]; //get the name of the element's second class
         sounds[targetSector].playbackRate = soundTempo;
         sounds[targetSector].play();
     }
 
-    //Stop all playing sounds
+    // Stop all playing sounds
     function stopSound() {
         for (var sound in sounds) {
             if (sounds.hasOwnProperty(sound) && !sounds[sound]) {
@@ -42,23 +41,22 @@ $(document).ready(function () {
     // Variable to keep track of the index of current element in computerChoices array
     var index = 0;
 
-
-    //Keep track of the game state to allow waiting for user's clicks
+    // Keep track of the game state to allow waiting for user's clicks
     var started = true;
 
-    //An array of all the class names for the sectors
+    // Array of all the class names for the sectors
     var sectors = [green, yellow, red, blue];
 
     // Arrays for user's and computer choices
     var userChoices = [], computerChoices = [];
 
-    //function to get a random element from an array
+    // Get a random element from an array
     function randomChoice(arr) {
         var i = Math.ceil(Math.random() * arr.length - 1);
         return arr[i];
     }
 
-    //function to 'play' the choices from an array
+    // 'Play' the choices from an array
     function playChoices(arr) {
         var i = 0;
 
@@ -69,7 +67,6 @@ $(document).ready(function () {
                 el.animate({opacity: 1}, animationTempo, function () {
                     el.removeAttr('style');
                     stopSound();
-                    started = true; // set started to true only after animation completes so user can't click until then
                 });
                 i++;
                 if (i < arr.length) {
@@ -81,11 +78,10 @@ $(document).ready(function () {
         myLoop();
     }
 
-    //Animate user's selection and add it to the respective array
+    // Animate user's selection and add it to the respective array
     function userMove() {
         stopSound();
         var el = $(this);
-        console.log(el);
         if (started) {
             if (userChoices.length < computerChoices.length) {
                 userChoices.push(el);
@@ -116,22 +112,24 @@ $(document).ready(function () {
         }
     }
 
-    //Check for the game state and wait till the player makes choices
+    // Check for the game state and wait till the player makes choices
     setInterval(function () {
         if (!started) {
             computerMove();
         }
     }, 1000);
 
-    //Choose a random sector and play it
+    // Choose a random sector and play it
     function computerMove() {
         userChoices = [];
         computerChoices.push(randomChoice(sectors));
         count++;
-        soundTempo = count < 5 ? 3 : count >= 5 && count < 9 ? 1.5 : count >= 9 && count < 13 ? 2 : 2.5;
-        animationTempo = count < 5 ? 350 : count >= 5 && count < 9 ? 750 : count >= 9 && count < 13 ? 500 : 350;
+        // Increase animation and sound speed depending on the count
+        soundTempo = count < 5 ? 1 : count >= 5 && count < 9 ? 1.5 : count >= 9 && count < 13 ? 2 : 2.5;
+        animationTempo = count < 5 ? 1000 : count >= 5 && count < 9 ? 750 : count >= 9 && count < 13 ? 500 : 450;
         playChoices(computerChoices);
         countScreen.hide().text(count).fadeIn();
+        started = true;
     }
 
     $('#start').on('click', function () {
@@ -140,7 +138,7 @@ $(document).ready(function () {
         }
     });
 
-    //Reset the game
+    // Reset the game
     $('#reset').on('click', function () {
         started = true;
         count = 0;
@@ -149,7 +147,7 @@ $(document).ready(function () {
         computerChoices = [];
     });
 
-    //Highlight a sector when pressed on and attach onclick event
+    // Highlight a sector when pressed on and attach onclick event
     sector.mousedown(function () {
         if (started) {
             $(this).animate({opacity: 1});
