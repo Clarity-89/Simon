@@ -59,7 +59,7 @@ $(document).ready(function () {
     // 'Play' the choices from an array
     function playChoices(arr) {
         var i = 0;
-
+        started = 'animating';
         function myLoop() {
             setTimeout(function () {
                 var el = arr[i];
@@ -71,18 +71,26 @@ $(document).ready(function () {
                 i++;
                 if (i < arr.length) {
                     myLoop();
+                } else {
+                    started = true;
                 }
+
             }, animationTempo)
         }
 
         myLoop();
+
+
+
+
     }
 
     // Animate user's selection and add it to the respective array
     function userMove() {
         stopSound();
         var el = $(this);
-        if (started) {
+        console.log(started);
+        if (started === true) {
             if (userChoices.length < computerChoices.length) {
                 userChoices.push(el);
                 if (el[0].className != computerChoices[index][0].className) {
@@ -94,6 +102,7 @@ $(document).ready(function () {
                         message.fadeOut(200);
                     }, 1100);
                     playChoices(computerChoices); //repeat choices
+                    //started = true;
                 } else {
                     playSound(el);
                     index++;
@@ -114,7 +123,7 @@ $(document).ready(function () {
 
     // Check for the game state and wait till the player makes choices
     setInterval(function () {
-        if (!started) {
+        if (started === false) {
             computerMove();
         }
     }, 1000);
@@ -126,10 +135,10 @@ $(document).ready(function () {
         count++;
         // Increase animation and sound speed depending on the count
         soundTempo = count < 5 ? 1 : count >= 5 && count < 9 ? 1.5 : count >= 9 && count < 13 ? 2 : 2.5;
-        animationTempo = count < 5 ? 1000 : count >= 5 && count < 9 ? 750 : count >= 9 && count < 13 ? 500 : 450;
+        animationTempo = count < 5 ? 1000 : count >= 5 && count < 9 ? 850 : count >= 9 && count < 13 ? 650 : 500;
         playChoices(computerChoices);
         countScreen.hide().text(count).fadeIn();
-        started = true;
+
     }
 
     $('#start').on('click', function () {
@@ -149,11 +158,11 @@ $(document).ready(function () {
 
     // Highlight a sector when pressed on and attach onclick event
     sector.mousedown(function () {
-        if (started) {
+        if (started === true) {
             $(this).animate({opacity: 1});
         }
     }).mouseup(function () {
-        if (started) {
+        if (started === true) {
             $(this).animate({opacity: 0.4});
         }
     }).click(userMove);
