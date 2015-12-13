@@ -85,7 +85,6 @@ $(document).ready(function () {
     function userMove() {
         stopSound();
         var el = $(this);
-        console.log(el, computerChoices);
         if (started === true) {
             if (userChoices.length < computerChoices.length) {
                 userChoices.push(el);
@@ -98,7 +97,6 @@ $(document).ready(function () {
                         message.fadeOut(200);
                     }, 1100);
                     playChoices(computerChoices); //repeat choices
-                    //started = true;
                 } else {
                     playSound(el);
                     index++;
