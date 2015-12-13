@@ -16,7 +16,8 @@ $(document).ready(function () {
         blue: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
         red: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
         yellow: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
-        error: new Audio('audio/error.wav')
+        error: new Audio('audio/error.wav'),
+        win: new Audio('audio/win.mp3')
     };
 
     // Track animation and sound speed
@@ -74,22 +75,17 @@ $(document).ready(function () {
                 } else {
                     started = true;
                 }
-
             }, animationTempo)
         }
 
         myLoop();
-
-
-
-
     }
 
     // Animate user's selection and add it to the respective array
     function userMove() {
         stopSound();
         var el = $(this);
-        console.log(started);
+        console.log(el, computerChoices);
         if (started === true) {
             if (userChoices.length < computerChoices.length) {
                 userChoices.push(el);
@@ -107,12 +103,18 @@ $(document).ready(function () {
                     playSound(el);
                     index++;
                     if (userChoices.length === computerChoices.length) {
-                        message.removeClass('alert-danger').addClass('alert-success').text('Correct!').show();
-                        setTimeout(function () {
-                            message.fadeOut(200);
-                        }, 1100);
-                        index = 0;
-                        started = false;
+                        if (index == 20) {
+                            $('.winner').modal('show');
+                            sounds.win.play();
+                            reset();
+                        } else {
+                            message.removeClass('alert-danger').addClass('alert-success').text('Correct!').show();
+                            setTimeout(function () {
+                                message.fadeOut(200);
+                            }, 1100);
+                            index = 0;
+                            started = false;
+                        }
                     }
                 }
             } else {
@@ -138,7 +140,6 @@ $(document).ready(function () {
         animationTempo = count < 5 ? 1000 : count >= 5 && count < 9 ? 850 : count >= 9 && count < 13 ? 650 : 500;
         playChoices(computerChoices);
         countScreen.hide().text(count).fadeIn();
-
     }
 
     $('#start').on('click', function () {
@@ -148,13 +149,17 @@ $(document).ready(function () {
     });
 
     // Reset the game
-    $('#reset').on('click', function () {
+    $('#reset').on('click', 'reset');
+
+    // Reset the game state
+    function reset() {
         started = true;
         count = 0;
         countScreen.text(count);
         userChoices = [];
         computerChoices = [];
-    });
+        index = 0;
+    }
 
     // Highlight a sector when pressed on and attach onclick event
     sector.mousedown(function () {
