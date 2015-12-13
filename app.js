@@ -147,7 +147,7 @@ $(document).ready(function () {
     });
 
     // Reset the game
-    $('#reset').on('click', 'reset');
+    $('#reset').click(reset);
 
     // Reset the game state
     function reset() {
