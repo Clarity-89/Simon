@@ -119,4 +119,62 @@ footer {
   width: 100%;
   text-align: center; }
 
+/*Shrink the size for mobile*/
+@media screen and (max-width: 468px) {
+  .sector {
+    height: 133.33333px;
+    width: 133.33333px; }
+
+  .circle {
+    height: 333.33333px;
+    width: 333.33333px; }
+
+  .round {
+    height: 180px;
+    width: 180px; }
+    .round h1 {
+      font-size: 20px;
+      margin-top: 8px; }
+
+  .btn-round {
+    height: 20px;
+    width: 20px;
+    border: solid 1px #50280b; }
+
+  .count {
+    width: 33px;
+    height: 26px;
+    font-size: 16px;
+    border-radius: 15px; }
+
+  #st, #rs, #c {
+    font-size: 10px; }
+
+  #st, #rs {
+    margin-top: 0; }
+
+  .green {
+    left: 23.33333px;
+    top: 20px;
+    background-color: #00b200;
+    border-radius: 320px 0 0 0; }
+
+  .yellow {
+    left: 23.33333px;
+    bottom: 20px;
+    background-color: #efef00;
+    border-radius: 0 0 0 320px; }
+
+  .red {
+    right: 23.33333px;
+    top: 20px;
+    background-color: red;
+    border-radius: 0 320px 0 0; }
+
+  .blue {
+    right: 23.33333px;
+    bottom: 20px;
+    background-color: blue;
+    border-radius: 0 0 320px 0; } }
+
 /*# sourceMappingURL=style.css.map */

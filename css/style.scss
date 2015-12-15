@@ -4,6 +4,8 @@ $sector-width: $sector-height;
 $sector-horiz: 35px;
 $sector-vertical: 30px;
 $border-color: rgba(45, 45, 45, 0.89);
+$circle-side: 500px;
+$round-side: 270px;
 
 html, body {
   height: 100%;
@@ -28,8 +30,8 @@ body {
   position: relative;
   background-color: $border-color;
   margin: 5% auto;
-  height: 500px;
-  width: 500px;
+  height: $circle-side;
+  width: $circle-side;
   border-radius: 50%;
 }
 
@@ -75,8 +77,8 @@ body {
 .round {
   position: absolute;
   background-color: #d0d0d0;
-  height: 270px;
-  width: 270px;
+  height: $round-side;
+  width: $round-side;
   border-radius: 50%;
   border: 20px solid $border-color;
   left: 0;
@@ -146,4 +148,72 @@ footer {
   bottom: 0;
   width: 100%;
   text-align: center;
+}
+
+/*Shrink the size for mobile*/
+@media screen and (max-width: 468px) {
+  .sector {
+    height: $sector-height/1.5;
+    width: $sector-width/1.5;
+  }
+  .circle {
+    height: $circle-side/1.5;
+    width: $circle-side/1.5;
+  }
+
+  .round {
+    height: $round-side/1.5;
+    width: $round-side/1.5;
+    h1 {
+      font-size: 20px;
+      margin-top: 8px;
+    }
+  }
+
+  .btn-round {
+    height: 20px;
+    width: 20px;
+    border: solid 1px #50280b;
+  }
+
+  .count {
+    width: 33px;
+    height: 26px;
+    font-size: 16px;
+    border-radius: 15px;
+  }
+  #st, #rs, #c {
+    font-size: 10px;
+  }
+  #st, #rs {
+    margin-top: 0;
+  }
+
+  .green {
+    left: $sector-horiz/1.5;
+    top: $sector-vertical/1.5;
+    background-color: #00b200;
+    border-radius: 320px 0 0 0;
+  }
+
+  .yellow {
+    left: $sector-horiz/1.5;
+    bottom: $sector-vertical/1.5;
+    background-color: #efef00;
+    border-radius: 0 0 0 320px;
+  }
+
+  .red {
+    right: $sector-horiz/1.5;
+    top: $sector-vertical/1.5;
+    background-color: red;
+    border-radius: 0 320px 0 0;
+  }
+
+  .blue {
+    right: $sector-horiz/1.5;
+    bottom: $sector-vertical/1.5;
+    background-color: blue;
+    border-radius: 0 0 320px 0;
+  }
 }
